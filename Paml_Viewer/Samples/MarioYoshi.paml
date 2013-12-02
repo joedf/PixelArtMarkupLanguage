@@ -8,7 +8,7 @@
 		ypixels=38
 		sizexpixels=8 ;pixel size, scale 2x size, ex: sizepixels=2
 		sizeypixels=8
-		bgcolor=#666
+		bgcolor=#666666
 	</info>
 
 	<defcolor> ;colorpixels=hex
