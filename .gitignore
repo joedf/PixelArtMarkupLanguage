@@ -2,11 +2,11 @@
 ## Eclipse
 #################
 
-*.sublime-workspace
 *.lnk
 *.dev
 *.layout
 *.cppcheck
+*.sublime-workspace
 *.sublime-project
 *.pydevproject
 .project
