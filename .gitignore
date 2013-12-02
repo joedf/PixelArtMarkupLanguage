@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+*.sublime-workspace
 *.lnk
 *.dev
 *.layout
