@@ -1,0 +1,39 @@
+1 ICON MainIcon.ico
+2 ICON FileIcon.ico
+3 ICON Arrow_Left.ico
+4 ICON Arrow_Right.ico
+5 ICON FullScreen.ico
+6 ICON FullScreen_Off.ico
+7 ICON ViewRS_Size.ico
+8 ICON Zoom.ico
+9 ICON Options.ico
+10 ICON Source.ico
+11 ICON FontSize.ico
+
+
+1 VERSIONINFO
+FILEVERSION 1,0,0,0
+PRODUCTVERSION 1,0,0,0
+FILEOS 0x4
+FILETYPE 0x1
+{
+	BLOCK "StringFileInfo"
+	{
+		BLOCK "040904B0"
+		{
+			VALUE "FileDescription", "Paml Processor v1.0.0"
+			VALUE "FileVersion", "1.0.0.0"
+			VALUE "InternalName", "Paml_v1.0.0.exe"
+			VALUE "LegalCopyright", "(C) 2013, Joe DF (joedf@users.sourceforge.net)"
+			VALUE "OriginalFilename", "Paml_v1.0.0.exe"
+			VALUE "ProductName", "Paml Processor"
+			VALUE "ProductVersion", "1.0.0.0"
+		}
+	}
+
+	BLOCK "VarFileInfo"
+	{
+		VALUE "Translation", 0x0409, 0x04B0
+	}
+}
+

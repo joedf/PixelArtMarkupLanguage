@@ -1,0 +1,42 @@
+<paml>
+
+	<info>
+		author=joedf
+		dateofcreation=unknown
+		license=undefined
+		xpixels=12 ;number of pixels, ex: xypixels=15
+		ypixels=19
+		sizexpixels=20 ;pixel size, scale 2x size, ex: sizepixels=2
+		sizeypixels=20
+		bgcolor=#666666
+	</info>
+
+	<defcolor> ;colorpixels=hex
+		t=transparent ;or x=#FFFFFF
+		b=black ;or o=#000000
+		w=#FFFFFF
+		</defcolor>
+
+	<drawpixels> ;12x19 equals 225 pixels
+		b,t,t,t,t,t,t,t,t,t,t,t,
+		b,b,t,t,t,t,t,t,t,t,t,t,
+		b,w,b,t,t,t,t,t,t,t,t,t,
+		b,w,w,b,t,t,t,t,t,t,t,t,
+		b,w,w,w,b,t,t,t,t,t,t,t,
+		b,w,w,w,w,b,t,t,t,t,t,t,
+		b,w,w,w,w,w,b,t,t,t,t,t,
+		b,w,w,w,w,w,w,b,t,t,t,t,
+		b,w,w,w,w,w,w,w,b,t,t,t,
+		b,w,w,w,w,w,w,w,w,b,t,t,
+		b,w,w,w,w,w,w,w,w,w,b,t,
+		b,w,w,w,w,w,w,w,w,w,w,b,
+		b,w,w,w,w,w,w,b,b,b,b,b,
+		b,w,w,w,b,w,w,b,t,t,t,t,
+		b,w,w,b,t,b,w,w,b,t,t,t,
+		b,w,b,t,t,b,w,w,b,t,t,t,
+		b,b,t,t,t,t,b,w,w,b,t,t,
+		t,t,t,t,t,t,b,w,w,b,t,t,
+		t,t,t,t,t,t,t,b,b,t,t,t,
+	</drawpixels>
+	
+</paml>

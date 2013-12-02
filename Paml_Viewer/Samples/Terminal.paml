@@ -1,0 +1,35 @@
+<paml>
+
+	<info>
+		author=Joe_DF
+		dateofcreation=2013-05-31
+		license=Undefined
+		xpixels=16
+		ypixels=13
+		sizexpixels=10
+		sizeypixels=10
+		bgcolor=null;white
+	</info>
+
+	<defcolor>
+		b=black ;or o=b000000
+		g=#C8C8C8
+	</defcolor>
+
+	<drawpixels> ;16x13 equals 208 pixels
+		b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,
+		b,g,g,g,g,g,g,g,g,g,g,g,g,g,g,b,
+		b,g,b,b,b,b,b,b,b,b,b,b,b,b,g,b,
+		b,g,b,b,g,b,b,b,b,b,b,b,b,b,g,b,
+		b,g,b,b,b,g,b,b,b,b,b,b,b,b,g,b,
+		b,g,b,b,g,b,g,g,b,b,b,b,b,b,g,b,
+		b,g,b,b,b,b,b,b,b,b,b,b,b,b,g,b,
+		b,g,b,b,b,b,b,b,b,b,b,b,b,b,g,b,
+		b,g,b,b,b,b,b,b,b,b,b,b,b,b,g,b,
+		b,g,b,b,b,b,b,b,b,b,b,b,b,b,g,b,
+		b,g,b,b,b,b,b,b,b,b,b,b,b,b,g,b,
+		b,g,g,g,g,g,g,g,g,g,g,g,g,g,g,b,
+		b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,
+	</drawpixels>
+
+</paml>

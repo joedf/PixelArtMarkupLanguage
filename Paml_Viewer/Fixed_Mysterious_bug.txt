@@ -1,0 +1,10 @@
+/// the C source file...
+
+//REVISION: 2013-09-26 21:43:15 - joedf
+// ------------------------------------------------------
+// ADDED: a few free() memory in IPC function
+//        Actual cause of the bug was not memory but Pamlviewer was
+//		  Correctly managing Tempfile names using only time with seconds
+//		  So clicking faster that 1 click/per second, would cause a "crash"
+//		  because, the other file is already Open... so Paml veiwer will be
+//		  updated accordingly.

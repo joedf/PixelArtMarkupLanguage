@@ -1,0 +1,34 @@
+<paml>
+
+	<info>
+		author=Utoo Entertainment+Joe_DF
+		dateofcreation=July/16/2012
+		license=undefined/Colored+Recreated_by_Joedf
+		xpixels=10
+		ypixels=10
+		sizexpixels=10 ;pixel size, scale 10x size
+		sizeypixels=10
+		bgcolor=null
+	</info>
+
+	<defcolor> ;colorpixels=hex
+		w=white ;or x=#FFFFFF
+		g=gray
+		p=pink
+		b=black ;or o=#000000
+	</defcolor>
+
+	<drawpixels> ;10x10 equals 100 pixels
+		b,b,b,b,b,b,b,b,w,w,
+		b,g,g,g,g,g,b,p,b,w,
+		w,b,g,g,b,g,b,b,b,w,
+		w,b,b,g,g,g,g,b,w,w,
+		w,w,b,b,b,g,g,g,b,w,
+		w,w,b,g,g,g,g,g,g,b,
+		b,w,b,b,b,g,g,g,g,b,
+		b,w,b,b,g,g,b,g,g,b,
+		b,w,b,g,g,g,b,g,b,b,
+		w,b,b,b,b,b,b,b,b,w,
+	</drawpixels>
+
+</paml>

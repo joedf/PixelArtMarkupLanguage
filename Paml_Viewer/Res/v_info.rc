@@ -1,0 +1,25 @@
+1 VERSIONINFO
+FILEVERSION 1,1,13,00
+PRODUCTVERSION 1,1,13,00
+FILEOS 0x4
+FILETYPE 0x1
+{
+BLOCK "StringFileInfo"
+{
+	BLOCK "040904b0"
+	{
+		VALUE "FileDescription", "Paml Viewer - .paml file viewer written by Joe DF \nInterface for PAML (Pixel Art Markup Language)"
+		VALUE "FileVersion", "1.1 Beta"
+		VALUE "InternalName", "AutoHotkey v1.1.13.00"
+		VALUE "LegalCopyright", "(C) 2013, Joe DF (joedf@users.sourceforge.net)"
+		VALUE "OriginalFilename", "PAML_Viewer.exe"
+		VALUE "ProductName", "Paml Viewer"
+		VALUE "ProductVersion", "1.1 Beta"
+	}
+}
+
+BLOCK "VarFileInfo"
+{
+	VALUE "Translation", 0x0409, 0x04B0
+}
+}

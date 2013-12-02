@@ -1,0 +1,40 @@
+<paml>
+
+	<info>
+		author=Joe_DF
+		dateofcreation=2013-05-31
+		license=Undefined
+		xpixels=16
+		ypixels=16
+		sizexpixels=10
+		sizeypixels=10
+		bgcolor=null;white
+	</info>
+
+	<defcolor>
+		b=black ;or o=b000000
+		x=#929292
+		y=#515151
+		z=#383838
+	</defcolor>
+
+	<drawpixels> ;16x16 equals 256 pixels
+		z,x,x, , , , , , , , , , , , , ,
+		y,z,x,x, , , , , , , , , , , , ,
+		y,y,z,x,x, , , , , , , , , , , ,
+		 ,y,y,z,x,x, , , , , , , , , , ,
+		 , ,y,y,z,x,x, , , , , , , , , ,
+		 , , ,y,y,z,x,x, , , , , , , , ,
+		 , , , ,y,y,z,x,x, , , , , , , ,
+		 , , , , ,y,y,z,x,x, , , ,b,b, ,
+		 , , , , , ,y,y,z,x,x, , , ,b, ,
+		 , , , , , , ,y,y,z,x,x, ,b,b, ,
+		 , , , , , , , ,y,y,z,x,b,b, , ,
+		 , , , , , , , , ,y,y,z,b, , , ,
+		 , , , , , , , , , ,b,b,b,b, , ,
+		 , , , , , , ,b, ,b,b, ,b,b,b, ,
+		 , , , , , , ,b,b,b, , , ,b,b,b,
+		 , , , , , , , , , , , , , ,b,b,
+	</drawpixels>
+
+</paml>

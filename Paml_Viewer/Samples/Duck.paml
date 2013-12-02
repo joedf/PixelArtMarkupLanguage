@@ -1,0 +1,38 @@
+<paml>
+
+	<info>
+		author=Utoo Entertainment+Joe_DF
+		dateofcreation=July/15/2012
+		license=undefined/Recreated_by_Joedf
+		xpixels=15 ;number of pixels, ex: xypixels=15
+		ypixels=15
+		sizexpixels=10 ;pixel size, scale 2x size, ex: sizepixels=2
+		sizeypixels=10
+	</info>
+
+	<defcolor> ;colorpixels=hex
+		w=white ;or x=#FFFFFF
+		y=yellow
+		o=orange
+		b=black ;or o=#000000
+	</defcolor>
+
+	<drawpixels> ;15x15 equals 225 pixels
+		w,w,w,w,b,b,b,b,w,w,w,w,w,w,w,
+		w,w,w,b,y,y,y,b,b,w,w,w,w,w,w,
+		w,w,w,b,y,b,y,y,b,b,w,w,w,w,w,
+		b,b,b,b,y,y,y,y,y,b,w,b,b,w,w,
+		w,w,w,b,b,b,y,y,b,b,w,w,b,b,w,
+		w,w,w,w,b,b,y,b,b,w,w,w,b,b,b,
+		w,w,w,b,b,y,b,b,w,w,w,b,b,o,b,
+		w,w,b,b,y,b,b,w,w,b,b,b,o,o,b,
+		w,b,b,y,b,b,w,w,b,b,b,o,o,o,b,
+		b,b,y,b,b,b,b,b,b,o,o,o,b,b,b,
+		b,y,y,b,b,o,o,o,o,o,o,b,b,y,b,
+		b,b,y,y,b,b,o,o,o,o,b,b,y,b,b,
+		w,b,b,y,y,b,b,b,b,b,b,y,b,b,w,
+		w,w,b,b,y,y,y,y,y,y,y,b,b,w,w,
+		w,w,w,b,b,b,b,b,b,b,b,b,w,w,w,
+	</drawpixels>
+
+</paml>

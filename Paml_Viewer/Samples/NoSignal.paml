@@ -1,0 +1,49 @@
+<paml>
+
+	<info>
+		author=Joe_DF
+		dateofcreation=2013-05-31
+		license=Undefined
+		xpixels=18
+		ypixels=18
+		sizexpixels=10
+		sizeypixels=10
+		bgcolor=null;white
+	</info>
+
+	<defcolor>
+		z=black ;or o=b000000
+		d=#141414 ;Dark grey
+		w=white
+		y=yellow
+		g=lime
+		r=red
+		b=blue
+		j=#C7B6FF
+		k=#9E7DFF
+		m=#000071
+	</defcolor>
+
+	<drawpixels>
+		z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,j,j,j,y,y,y,g,g,g,k,k,k,r,r,r,b,z,
+		z,w,w,w,w,d,d,d,d,m,m,m,m,z,z,z,z,z,
+		z,w,w,w,w,d,d,d,d,m,m,m,m,z,z,z,z,z,
+		z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,
+	</drawpixels>
+
+</paml>

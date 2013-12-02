@@ -1,0 +1,43 @@
+<paml>
+
+	<info>
+		author=Nintendo
+		dateofcreation=2013-05-31
+		license=recreated_by_joedf
+		xpixels=16
+		ypixels=17
+		sizexpixels=10
+		sizeypixels=10
+		bgcolor=null;white
+	</info>
+
+	<defcolor> ;colorpixels=hex
+		.=transparent ;or x=#FFFFFF
+		b=black ;or o=#000000
+		o=#F88800
+		r=#B82901
+		l=#00F801
+		g=#00B800
+	</defcolor>
+
+	<drawpixels> ;16x17 equals 272 pixels
+		.,.,.,.,.,.,.,b,b,.,.,.,.,.,.,.,
+		.,.,b,.,.,.,b,o,o,b,.,.,.,b,.,.,
+		.,b,o,b,.,b,o,o,o,o,b,.,b,r,b,.,
+		.,b,o,o,b,o,o,o,o,o,o,b,o,o,b,.,
+		b,o,o,o,o,o,o,o,o,o,o,o,o,o,o,b,
+		b,o,o,o,b,b,o,o,o,b,b,o,o,o,r,b,
+		b,o,o,b,o,o,b,o,b,o,o,b,o,o,r,b,
+		b,o,o,o,o,o,o,o,o,o,o,o,o,r,r,b,
+		.,b,o,o,o,o,o,o,o,o,o,o,o,r,b,.,
+		.,.,b,r,o,o,o,o,o,o,r,r,r,b,.,.,
+		.,.,.,b,b,r,r,r,r,r,r,b,b,.,.,.,
+		.,.,.,.,.,b,b,b,b,b,b,.,.,.,.,.,
+		.,.,b,b,b,.,b,l,g,b,b,b,b,.,.,.,
+		.,b,l,l,g,b,b,l,g,b,l,l,g,b,.,.,
+		b,l,l,l,l,g,b,l,b,l,l,l,l,g,b,.,
+		b,g,g,g,g,g,b,b,b,g,g,g,g,g,b,.,
+		b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,.,
+	</drawpixels>
+
+</paml>

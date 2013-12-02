@@ -1,0 +1,43 @@
+<paml>
+
+	<info>
+		author=Nintendo
+		dateofcreation=2013-05-31
+		license=Recreated_by_Joe_DF
+		xpixels=29
+		ypixels=20
+		sizexpixels=10
+		sizeypixels=10
+		bgcolor=#74E496 ;blue
+	</info>
+
+	<defcolor>
+		t=
+		z=black ;or o=b000000
+		w=white
+		y=yellow
+		n=#66B1FF
+		b=#AA5500
+		r=#D00000
+	</defcolor>
+
+	<drawpixels>
+		 , , , ,z,z,z,z,z,z, , , , , , , , , , , , , , , , , , , ,
+		 , , ,z,r,r,r,r,r,r,z, , , , , , , , , , , , ,z,z, , , , ,
+		 , ,z,r,r,r,r,r,r,r,r,z, , , , , , , , ,z,z,z,z,z,z,z,z,z,
+		 ,z,z,w,r,r,r,r,r,r,r,z, , , , , ,z,z,z,y,y,z,z,z,y,y,y,z,
+		z,w,w,w,w,r,z,z,z,z,z,z,z, , , ,z,y,y,y,y,y,y,z,y,y,y,z, ,
+		 ,z,z,r,r,r,r,z,z,z,z,z,z, , ,z,y,y,y,y,y,y,z,z,y,y,z, , ,
+		 , ,z,w,z,w,w,z,w,w,z,z,z, , ,z,y,y,y,y,y,y,z,y,y,z, , , ,
+		 , ,z,w,z,w,w,z,w,w,z,z, , ,z,y,y,z,y,y,y,y,y,z,y,z,z,z, ,
+		 , ,z,w,w,w,w,w,w,w,z, , , ,z,y,y,y,y,y,y,y,y,z,z,y,y,z, ,
+		 , , ,z,w,w,w,w,z,z,n,z, , , ,z,y,y,y,y,y,b,b,b,z,b,z, , ,
+		 , , , ,z,z,z,z,z,z,n,z, , , ,z,y,y,y,y,y,y,y,y,z,b,b,z, ,
+		 , ,z,z,z,z,z,z,w,w,z,z, , , ,z,y,z,z,y,y,b,b,b,z,b,z, , ,
+		 ,z,w,w,z,w,w,z,w,w,z,w,z, , ,z,z,y,y,y,y,y,y,z,z,z, , , ,
+		 , ,z,w,w,z,z,z,z,z,w,w,z, ,z,y,y,z,y,y,y,y,z,z,y,z, , , ,
+		 , , ,z,z,z, , , , ,z,z, , , ,z,z, ,z,z,z,z,y,y,z, , , , ,
+		 , , , , , , , , , , , , , , , , , , , , , ,z,z, , , , , ,
+	</drawpixels>
+
+</paml>
