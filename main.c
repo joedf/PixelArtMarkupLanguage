@@ -1,51 +1,3 @@
-//REVISION: 2013-09-26 21:43:15 - joedf
-// ------------------------------------------------------
-// ADDED: a few free() memory in IPC function
-//        Actual cause of the bug was not memory but Pamlviewer was
-//		  Correctly managing Tempfile names using only time with seconds
-//		  So clicking faster that 1 click/per second, would cause a "crash"
-//		  because, the other file is already Open... so Paml veiwer will be
-//		  updated accordingly.
-
-//REVISION: 2013-06-03 02:04:53 - joedf
-// ------------------------------------------------------
-// ADDED: Patch ~HTML_#001 @ line ~698
-// StrReplaceAll() seems to have better performance then str_replaceAll()...
-//   	Further investigation will be needed, unsure if StrReplaceAll() is
-//  	real source of the "problem" (DLL crashes)
-
-//REVISION: 2013-05-27 23:51:23 - joedf
-// ------------------------------------------------------
-// TEMPDIR has been added to avoid UAC Problems, and that the System/OS tempdir
-//  	may be used/specifed from a DllCall
-// A few fixes for DLL interface, +DLL Bug fixes
-// 		eg. Crashes, Access Violation, etc...
-// Interaction with Paml Viewer is now working very well...
-// IMPORTANT: StrReplaceAll() has been completely by str_replaceAll()
-//  	Since it was causing some kind of weird memory/pointer bug...
-// SubStr2() has been added as alternative to SubStr()
-//  	Not sure, if it's better, or fully function, might be, further
-//  	testing will be needed, seems to help fix problems with the
-//  	DLL interaction...
-//  	For the moment, it is being used in tag_get(), seems to work well...
-
-//REVISION: 2013-05-26 01:58:58 - joedf
-// ------------------------------------------------------
-// DLL building has been added
-// "Access Violation" bug fix, by allocating memory
-// 	-	pamlfile_t *paml;
-// 	+	pamlfile_t *paml = malloc(sizeof *paml);
-//  possible fix for main too? create paml_main() instead of
-//  directly nesting it twice (2) both in IPC_paml() & main()
-//  ?!? --> Would this also be a possible fix for the x64 build?
-
-//REVISION: 2013-05-23 18:52 - joedf
-// ------------------------------------------------------
-// libbmp has been completely replaced with QDBMP (Quick n' Dirty BMP)
-//	 Advantages:
-//		-Reading (get pixel)
-//		-"Valid" bmp files
-
 #define APP_VERSION "1.0.0"
 #define APP_NAME "PAML Processor"
 
@@ -806,8 +758,10 @@ char *preprocess(char *paml_file) {
 	printf("\tStripping comments...\n");
 	//stripping comments
 	char *tmp2 = gettempname();
-	char *outname2 = (char*)malloc(strlen(tmp2));
+	//char *outname2 = (char*)malloc(strlen(tmp2));
+	char *outname2 = malloc(strlen(tmp2)+1);
 	strcpy(outname2,tmp2);
+	outname[strlen(tmp2)]='\0';
 
 	FILE* pTEMP = fopen(outname, "rb");
 	if (pTEMP == NULL) {
