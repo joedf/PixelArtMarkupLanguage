@@ -665,7 +665,7 @@ int paml_write_HTML(pamlfile_t *paml, char *file) {
 		{
 			//Writting CSS...
 			if (strlen(DEF_NAME[d])>0 && strlen(DEF_VALUE[d])>0) //Patch ~HTML_#001
-				fprintf(pFile,"#%s{background-color:%s%s}\n", DEF_NAME[d], (validhex(DEF_VALUE[d]) && DEF_VALUE[d][0]!='#') ? "#" : "", DEF_VALUE[d]);
+				fprintf(pFile,".%s{background-color:%s%s}\n", DEF_NAME[d], (validhex(DEF_VALUE[d]) && DEF_VALUE[d][0]!='#') ? "#" : "", DEF_VALUE[d]);
 			//fprintf(pFile,"#%s{width:%dpx;height:%dpx;background-color:%s%s;border:0px solid #000;float:left;}\n", DEF_NAME[d], paml->sizexpixels, paml->sizeypixels, (validhex(DEF_VALUE[d]) && DEF_VALUE[d][0]!='#') ? "#" : "", DEF_VALUE[d]);
 		}
 		fputs("</style>\n", pFile);
@@ -700,7 +700,7 @@ int paml_write_HTML(pamlfile_t *paml, char *file) {
 			if (strlen(pvalue)==0)
 				fputs("\n<td />",pFile);
 			else
-				fprintf(pFile,"\n<td id=\"%s\" />", pvalue);
+				fprintf(pFile,"\n<td class=\"%s\" />", pvalue);
 
 			pstart = pstop;
 		}

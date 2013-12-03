@@ -5,6 +5,7 @@
 *.lnk
 *.dev
 *.layout
+*.dll
 *.cppcheck
 *.sublime-workspace
 *.sublime-project
