@@ -209,12 +209,22 @@ int main(int argc, char **argv) {
 	char *pp_paml_file = preprocess(paml_file);
 	if (pp_paml_file == NULL) exit(-1);
 
-	pamlfile_t *paml;
+	pamlfile_t *paml = malloc((sizeof *paml));
+	paml->author = malloc(128);
+	paml->date = malloc(64);
+	paml->license = malloc(128);
+	paml->bgcolor = malloc(16);
+	paml->xpixels = 1;
+	paml->ypixels = 1;
+	paml->sizexpixels = 1;
+	paml->sizeypixels = 1;
+	paml->drawpixels = malloc(2048);
+	
 	paml_read(paml, pp_paml_file);
 	FileDelete(pp_paml_file);
 
 	//char *Out_File = (char*)malloc(strlen(paml_file)+6);
-	char *Out_File = (char*)malloc(270);
+	char *Out_File = calloc(strlen(paml_file)+6,sizeof(int));//(char*)malloc(270);
 	
 	if (_OUTFILE==NULL)
 		sprintf(Out_File,"%s%s",getname_noext(paml_file),output_type_ext(_OUTTYPE));
