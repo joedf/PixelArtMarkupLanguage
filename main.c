@@ -21,6 +21,7 @@
 
 #define MAXDEFS 256
 #define MAXDEF_SIZE 64
+#define MAX_FILESIZE 4096
 
 #define PAML_BMP 223 //ASCII values B+M+P=66+77+80
 #define PAML_HTML 309 // H+T+M+L=72+84+77+76
@@ -61,6 +62,7 @@ char *_MAINFILE;
 char *_OUTFILE;
 int   _OUTTYPE;
 int   _HTML_CENTER=0;
+int   _HTML_CSS=0;
 char *_TEMPDIR; //used for modded gettempname() function, TEMPDIR has been added to avoid UAC Problems
 
 //Handling paml_t functions
@@ -277,6 +279,9 @@ void get_args(int argc, char** argv) {
 
 				case 'c': _HTML_CENTER = 1;
 						break;
+
+				case 's': _HTML_CSS = 1;
+						break;
 						
 				case 'h': help();
 						break;
@@ -295,6 +300,7 @@ void help() {
 	printf("\t-o        |Output to file path\n");
 	printf("\t-t        |Output file type [BMP/PNG/XPM/HTML]\n");
 	printf("\t-c        |Centers HTML output, in [HTML] mode\n");
+	printf("\t-s        |Allows <style>, in [HTML] mode\n");
 	printf("\t-a        |About this software\n");
 	printf("\t-h,--help |Displays this (help) message\n");
 }
@@ -392,6 +398,22 @@ int paml_read(pamlfile_t *paml, char *file) {
 
 	char *dcolor = tag_get("defcolor",paml_t);
 	char *dpixel = stripCRLF(tag_get("drawpixels",paml_t));
+
+	/*
+	char *dpixel = malloc(MAX_FILESIZE);
+	char *dpixel = tag_get("drawpixels",paml_t);
+
+	int crlf_n = strpos("\n",dpixel);
+	int crlf_r = strpos("\r",dpixel);
+	if ((crlf_r > 0) && (crlf_r < crlf_n))
+	{
+		dpixel=strRtrim(dpixel,1+strlen(dpixel)-crlf_r);
+	}
+	else if ((crlf_n > 0) && (crlf_n < crlf_r))
+	{
+		dpixel=strRtrim(dpixel,1+strlen(dpixel)-crlf_n);
+	}
+	*/
 
 	char *tmpdef = gettempname();
 	FILE* pDefw = fopen(tmpdef, "wb");
@@ -651,70 +673,114 @@ int paml_write_HTML(pamlfile_t *paml, char *file) {
 		fprintf(pFile,"\tsizeypixels: %d\n", paml->sizeypixels);
 		fputs("\nPAML_METADATA-->\n\n", pFile);
 
-		//Write CSS Style Definitions
-		fputs("<style>\n",pFile);
-			
-			//Write Image centering CSS if _HTML_CENTER is true
-			if (_HTML_CENTER)
+		if (_HTML_CSS)
+		{
+			//Write CSS Style Definitions
+			fputs("<style>\n",pFile);
+				
+				//Write Image centering CSS if _HTML_CENTER is true
+				if (_HTML_CENTER)
+				{
+					char c_code[128];
+					sprintf(c_code,".Paml{position:absolute;left:50%%;top:50%%;margin-left:-%dpx;margin-top:-%dpx;}",(paml->xpixels * paml->sizexpixels)/2,(paml->ypixels * paml->sizeypixels)/2);
+					fprintf(pFile, "%s\n", c_code);
+				}
+
+				//Each Definitions looks a bit like this
+				//	#%symbol%{width: %sizexpixels%px;
+				//	height: %sizeypixels%px;background-color: %color%;
+				//	border:0px solid #000;float: left;}
+
+			//CSS .Paml td == Pixel definitions eg. width, etc...
+			fprintf(pFile,".Paml td{width:%dpx;height:%dpx;border:0px solid #000;float:left;}\n",paml->sizexpixels, paml->sizeypixels);
+
+			int d;
+			for (d = 0; d < DEF_TOTAL; ++d)
 			{
-				char c_code[128];
-				sprintf(c_code,".Paml{position:absolute;left:50%%;top:50%%;margin-left:-%dpx;margin-top:-%dpx;}",(paml->xpixels * paml->sizexpixels)/2,(paml->ypixels * paml->sizeypixels)/2);
-				fprintf(pFile, "%s\n", c_code);
+				//Writting CSS...
+				if (strlen(DEF_NAME[d])>0 && strlen(DEF_VALUE[d])>0) //Patch ~HTML_#001
+					fprintf(pFile,".%s{background-color:%s%s}\n", DEF_NAME[d], (validhex(DEF_VALUE[d]) && DEF_VALUE[d][0]!='#') ? "#" : "", DEF_VALUE[d]);
+				//fprintf(pFile,"#%s{width:%dpx;height:%dpx;background-color:%s%s;border:0px solid #000;float:left;}\n", DEF_NAME[d], paml->sizexpixels, paml->sizeypixels, (validhex(DEF_VALUE[d]) && DEF_VALUE[d][0]!='#') ? "#" : "", DEF_VALUE[d]);
 			}
+			fputs("</style>\n", pFile);
 
-			//Each Definitions looks a bit like this
-			//	#%symbol%{width: %sizexpixels%px`;
-			//	height: %sizeypixels%px`;background-color: %color%`;
-			//	border:0px solid #000`;float: left`;}
+			//Set HTML Body Style (CSS)
+			fprintf(pFile,"<body style=\"background-color:%s%s;\" marginwidth=\"0\" marginheight=\"0\">\n\n", (validhex(paml->bgcolor) && paml->bgcolor[0]!='#') ? "#" : "", paml->bgcolor);
 
-		//CSS .Paml td == Pixel definitions eg. width, etc...
-		fprintf(pFile,".Paml td{width:%dpx;height:%dpx;border:0px solid #000;float:left;}\n",paml->sizexpixels, paml->sizeypixels);
+			//Set PixelMap Table START
+			fputs("<table class=\"Paml\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>", pFile);
 
-		int d;
-		for (d = 0; d < DEF_TOTAL; ++d)
-		{
-			//Writting CSS...
-			if (strlen(DEF_NAME[d])>0 && strlen(DEF_VALUE[d])>0) //Patch ~HTML_#001
-				fprintf(pFile,".%s{background-color:%s%s}\n", DEF_NAME[d], (validhex(DEF_VALUE[d]) && DEF_VALUE[d][0]!='#') ? "#" : "", DEF_VALUE[d]);
-			//fprintf(pFile,"#%s{width:%dpx;height:%dpx;background-color:%s%s;border:0px solid #000;float:left;}\n", DEF_NAME[d], paml->sizexpixels, paml->sizeypixels, (validhex(DEF_VALUE[d]) && DEF_VALUE[d][0]!='#') ? "#" : "", DEF_VALUE[d]);
-		}
-		fputs("</style>\n", pFile);
+			//Loop through Pixel Array (paml->drawpixels)
+			int pcount, pstart = 0, pstop;
+			char pseparator = ',';
+			int ptotal = strchro(paml->drawpixels, pseparator);
+			char *pvalue = (char*)malloc(MAXDEF_SIZE);
+			int w = paml->xpixels;
+			if (w <= 0) w = 1;
 
-		//Set HTML Body Style (CSS)
-		fprintf(pFile,"<body style=\"background-color:%s%s;\" marginwidth=\"0\" marginheight=\"0\">\n\n", (validhex(paml->bgcolor) && paml->bgcolor[0]!='#') ? "#" : "", paml->bgcolor);
-
-		//Set PixelMap Table START
-		fputs("<table class=\"Paml\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>", pFile);
-
-		//Loop through Pixel Array (paml->drawpixels)
-		int pcount, pstart = 0, pstop;
-		char pseparator = ',';
-		int ptotal = strchro(paml->drawpixels, pseparator);
-		char *pvalue = (char*)malloc(MAXDEF_SIZE);
-		int w = paml->xpixels;
-		if (w <= 0) w = 1;
-
-		for (pcount = 0; pcount < ptotal; ++pcount)
-		{
-			pstop = strchposo(pseparator, paml->drawpixels, pcount+1);
-			pvalue = SubStr(paml->drawpixels, pstart+1, pstop);
-			//paml_def_get(pvalue,paml->bgcolor));
-
-			//Write Table row start/stop Indicator
-			if ((pcount%w)==0 && pcount!=0)
+			for (pcount = 0; pcount < ptotal; ++pcount)
 			{
+				pstop = strchposo(pseparator, paml->drawpixels, pcount+1);
+				pvalue = SubStr(paml->drawpixels, pstart+1, pstop);
+				//paml_def_get(pvalue,paml->bgcolor));
+
+				//Write Table row start/stop Indicator
+				if ((pcount%w)==0 && pcount!=0)
+				{
+						fputs("\n</tr>",pFile);
+						fputs("\n<tr>",pFile);
+				}
+
+				if (strlen(pvalue)==0)
+					fputs("\n<td />",pFile);
+				else
+					fprintf(pFile,"\n<td class=\"%s\" />", pvalue);
+
+				pstart = pstop;
+			}
+		}
+		else
+		{
+			fprintf(pFile,"<body style=\"background-color:%s%s;\" marginwidth=\"0\" marginheight=\"0\">\n\n", (validhex(paml->bgcolor) && paml->bgcolor[0]!='#') ? "#" : "", paml->bgcolor);
+			
+			if (_HTML_CENTER)
+				fprintf(pFile,"<table style=\"position:absolute;left:50%%;top:50%%;margin-left:-%dpx;margin-top:-%dpx;\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>", (paml->xpixels * paml->sizexpixels)/2,(paml->ypixels * paml->sizeypixels)/2);
+			else
+				fputs("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>",pFile);
+
+			int pcount, pstart = 0, pstop;
+			char pseparator = ',';
+			int ptotal = strchro(paml->drawpixels, pseparator);
+			char *pvalue = (char*)malloc(MAXDEF_SIZE);
+			int w = paml->xpixels;
+
+			if (w <= 0) w = 1;
+
+			char *loop_color = malloc(MAXDEF_SIZE);
+
+			for (pcount = 0; pcount < ptotal; ++pcount)
+			{
+				pstop = strchposo(pseparator, paml->drawpixels, pcount+1);
+				pvalue = SubStr(paml->drawpixels, pstart+1, pstop);
+				loop_color=paml_def_get(pvalue,paml->bgcolor);
+
+				if ((pcount%w)==0 && pcount!=0)
+				{
 					fputs("\n</tr>",pFile);
 					fputs("\n<tr>",pFile);
+				}
+
+				if (strlen(pvalue)==0)
+					fprintf(pFile,"\n<td style=\"width:%dpx;height:%dpx;border:0px solid #000;float:left;\"/>",paml->sizexpixels, paml->sizeypixels);
+				else
+				{
+					fprintf(pFile,"\n<td style=\"width:%dpx;height:%dpx;border:0px solid #000;float:left;",paml->sizexpixels, paml->sizeypixels);
+					fprintf(pFile,"background-color:%s%s;\"/>",(validhex(loop_color) && loop_color[0]!='#') ? "#" : "", loop_color);
+				}
+
+				pstart = pstop;
 			}
-
-			if (strlen(pvalue)==0)
-				fputs("\n<td />",pFile);
-			else
-				fprintf(pFile,"\n<td class=\"%s\" />", pvalue);
-
-			pstart = pstop;
 		}
-
 		//HTML END
 		fputs("\n</tr>\n</table>\n\n</body>\n</html>", pFile);
 		
@@ -900,7 +966,16 @@ char *tag_get(char *tag, char *paml_t) {
 	sprintf(tag_open,"<%s>",tag);
 	sprintf(tag_close,"</%s>",tag);
 
-	int tag_start = strpos(tag_open,paml_t) + strlen(tag_open);
+	int tag_start = strpos(tag_open,paml_t);
+
+	if (tag_start < 0)
+	{
+		printf("Error: Missing Open Tag \"%s\"\n", tag_open);
+		exit(-1);
+	}
+
+	tag_start+=strlen(tag_open);
+
 	int tag_end = strpos(tag_close,paml_t);
 
 	if (tag_end < 0)

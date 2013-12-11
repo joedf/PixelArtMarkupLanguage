@@ -1,0 +1,38 @@
+<paml>
+
+	<info>
+		author=Joe DF
+		dateofcreation=2013-12-10
+		license=Joe DF
+		xpixels=16
+		ypixels=16
+		sizexpixels=8
+		sizeypixels=8
+		bgcolor=#FFFFFF
+	</info>
+
+	<defcolor>
+		;=transparent
+		b=#000000
+		r=#FF0000
+	</defcolor>
+	<drawpixels>
+		 , , ,b,b,b, , , , , , , , , , ,
+		 , , ,b,r,b, , , , , , , , , , ,
+		 , , ,b,r,b, , , , , , , , , , ,
+		 , , ,b,r,b, , , , , , , , , , ,
+		 , , ,b,r,b,b,b,b,b,b,b,b,b, , ,
+		 , , ,b,r,b,r,r,r,b,r,r,r,b, , ,
+		 , , ,b,r,b,r,b,r,b,r,b,b,b, , ,
+		 , , ,b,r,b,r,b,r,b,r,r,b, , , ,
+		b,b,b,b,r,b,r,b,r,b,r,b,b,b, , ,
+		b,r,r,r,r,b,r,r,r,b,r,r,r,b, , ,
+		b,b,b,b,b,b,b,b,b,b,b,b,b,b, , ,
+		b,r,r,b,b,r,r,r,b,r,b,r,r,b, , ,
+		b,r,b,r,b,r,b,b,b,r,b,r,b,b, , ,
+		b,r,b,r,b,r,r,b,b,b,b,b,r,b, , ,
+		b,r,r,b,b,r,b,b, , ,b,r,r,b, , ,
+		b,b,b,b,b,b,b, , , ,b,b,b,b, , ,
+	</drawpixels>
+
+</paml>
