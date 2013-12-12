@@ -5,20 +5,20 @@
 		dateofcreation=2013-05-31
 		license=Recreated_by_Joe_DF
 		xpixels=29
-		ypixels=20
+		ypixels=16
 		sizexpixels=10
 		sizeypixels=10
 		bgcolor=#74E496 ;blue
 	</info>
 
 	<defcolor>
-		t=
 		z=black ;or o=b000000
-		w=white
+		w=whitesmoke
 		y=yellow
 		n=#66B1FF
 		b=#AA5500
 		r=#D00000
+		o=orange
 	</defcolor>
 
 	<drawpixels>
