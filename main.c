@@ -928,6 +928,8 @@ int paml_def(char *tmpdef, char *bgcolor) {
 			}
 			else
 			{
+				if (strcmp(defvalue,HTMLCOLOR_DEFAULTNAME)==0)
+					sprintf(DEF_VALUE[defcount],"%s",HTMLCOLOR_DEFAULT);
 				if ((!htmlcolorvalid(defvalue)) || (defvalue == NULL))
 					sprintf(DEF_VALUE[defcount],"%s",bgcolor);
 				else
