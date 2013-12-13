@@ -109,6 +109,7 @@ DLLEXPORT int IPC_paml(char *paml_file, char* outfile, char* outtype, char* tmpd
 	_TEMPDIR = tmpdir;
 
 	_HTML_CENTER = 1;
+	_HTML_CSS = 1;
 
 	_MAINFILE = paml_file;
 
