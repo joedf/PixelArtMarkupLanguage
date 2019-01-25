@@ -97,7 +97,6 @@ for each line in rawPaml pixelData
         double each def symbol
     append modified line to newPixelData
 */
-
 for(var i=0;i<rDPix.length;i++){
 	var sym = rDPix[i].trim();
 	if (sym.length == 0) {
@@ -105,12 +104,24 @@ for(var i=0;i<rDPix.length;i++){
 	}
 	newPixelData.push(sym);
 }
+// check for erronous length and fill with transparent pixels
+var ePixel = (newPixelData.length % metadata['xpixels']);
+if (ePixel>0) {
+	if (ePixel > 2) {
+		var nError = newPixelData.length - ePixel;
+		for(var i=0;i<nError;i++) {
+			newPixelData.push(' ');
+		}
+	} else {
+		newPixelData = newPixelData.slice(0,-1);
+	}
+}
 
 
 /////////////////// Define functions ///////////////////
 function color2css(colorcode) {
 	if (colorcode == ' ') //color2css(' '); // defaults to transparent...
-		return 'color:transparent;background:none';
+		colorcode = 'transparent';
 	return 'color:'+colorcode+';background:'+colorcode;
 }
 
@@ -132,7 +143,7 @@ function consoleDrawPAML(colors,pixels,metadata) {
 	}
 	var ConsoleOutParams = [result].concat(arrBrushes);
 	console.log.apply(null,ConsoleOutParams);
-	console.log(ConsoleOutParams);
+	// console.log(ConsoleOutParams); //debug info
 }
 
 /////////////////// Print parse data ///////////////////
@@ -158,6 +169,5 @@ for(var i=0;i<newPixelData.length;i++){
 	}
 	sPrint = sPrint + newPixelData[i] + ',';
 }
-sPrint = sPrint.slice(0,-1); //trim last ',' char
 console.log(sPrint);
 consoleDrawPAML(colorlist,newPixelData,metadata);
