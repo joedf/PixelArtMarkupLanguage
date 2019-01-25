@@ -1,0 +1,64 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>title</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="paml.2.js"></script>
+		<canvas id=MyPamlCanvas></canvas>
+		<paml id='MyPamlFile'>
+
+			<info>
+				author=Nintendo
+				dateofcreation=2013-05-31
+				license=Recreated_by_Joe_DF
+				xpixels=19
+				ypixels=20
+				sizexpixels=10
+				sizeypixels=10
+				bgcolor=#0055AA ;blue
+			</info>
+		
+			<defcolor>
+				b=black ;or o=b000000
+				g=#555555 ;Dark grey
+				w=white
+				y=yellow
+				x=#D3D300
+				r=#FF3E3E
+			</defcolor>
+		
+			<drawpixels>
+				 , , , , ,b,b, , , , , , , , , ,b, , ,
+				 , , , ,b,g,b, , , , , , , , ,b,y,b, ,
+				 , , , ,b,y,b, , , , , , , ,b,y,x,x,b,
+				 , , ,b,y,y,b, , , , ,b,b,b,y,x,x,x,b,
+				 , , ,b,y,x,b, , ,b,b,g,g,b,x,x,x,b, ,
+				 , ,b,y,y,y,y,b,b,y,y,g,b,x,x,x,b, , ,
+				 ,b,y,y,y,y,y,y,y,y,y,b,b,x,x,b, , , ,
+				b,w,y,y,y,y,y,y,y,y,x,b, ,b,x,x,b, , ,
+				b,b,y,y,y,y,y,y,y,y,y,b, , ,b,x,b, , ,
+				b,y,y,y,y,w,b,y,y,y,y,x,b,b,x,b, , , ,
+				 ,b,y,y,y,b,b,r,r,y,x,x,b,b,b, , , , ,
+				 , ,b,x,y,y,y,r,x,x,x,b,b,b, , , , , ,
+				 ,b,y,x,x,x,x,x,x,x,x,x,x,b, , , , , ,
+				 , ,b,b,y,y,y,y,y,b,x,x,b,b, , , , , ,
+				 , , ,b,x,y,y,y,b,y,x,x,x,b, , , , , ,
+				 , ,b,x,b,x,x,x,x,b,x,x,x,b, , , , , ,
+				 , ,b,b,b,b,b,x,x,x,x,x,b, , , , , , ,
+				 , , , , , , ,b,b,b,x,b,b, , , , , , ,
+				 , , , , , , , ,b,y,y,x,b, , , , , , ,
+				 , , , , , , , , ,b,b,b, , , , , , , ,
+			</drawpixels>
+		
+		</paml>
+		<script type="text/javascript">
+			var myPamlData = document.getElementById('MyPamlFile').outerHTML;
+			var myPamlCanvas = document.getElementById('MyPamlCanvas');
+
+			// parse and draw
+			var myPaml = new PAML( myPamlData ).parse().canvasDraw( myPamlCanvas );
+		</script>
+	</body>
+</html>
