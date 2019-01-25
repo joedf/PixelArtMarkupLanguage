@@ -54,7 +54,7 @@ var paml = doc.getElementsByTagName('paml')[0];
 
 var rInfo = paml.getElementsByTagName('info')[0].textContent.replace(/[ \t]/ig,'').trim().split('\n');
 var rDefs = paml.getElementsByTagName('defcolor')[0].textContent.trim().split('\n');
-var rDPix = paml.getElementsByTagName('drawpixels')[0].textContent.trim().split(',');
+var rDPix = paml.getElementsByTagName('drawpixels')[0].textContent.trim().split('\n');
 
 
 metadata = [];
@@ -64,11 +64,12 @@ colorlist = [];
 
 /////////////////// Parse Metadata ///////////////////
 for(var i=0;i<rInfo.length;i++){
-	var raw = rInfo[i].trim().split('=');
+	var line = rInfo[i].split(';')[0].trim(); // remove comments
+	var raw = line.trim().split('=');
 	var prop = raw[0].toLowerCase().trim();
 	if (prop[0] == ';') // watch for comments
 		continue;
-	var val = raw[1].split(';')[0].trim(); // remove comments 
+	var val = raw[1];
 	if (['xpixels','ypixels','sizexpixels','sizeypixels'].includes(prop) ) {
 		val = parseInt(val); // read as number
 	}
@@ -83,9 +84,12 @@ for each def in rawPaml
     colorlist.push('b');
 */
 for(var i=0;i<rDefs.length;i++){
-	var def = rDefs[i].trim().split('=');
-	var sym = def[0];
-	var val = def[1].split(';')[0].trim(); // remove comments 
+	var line = rDefs[i].split(';')[0].trim(); // remove comments
+	var def = line.trim().split('=');
+	var sym = def[0].trim();
+	if (sym.length == 0 || def.length < 2) // skip blank lines
+		continue;
+	var val = def[1];
 	colorlist[sym] = val;
 }
 //add default transparent
@@ -96,6 +100,12 @@ if (typeof metadata['bgcolor'] == 'string' && metadata['bgcolor'].length > 1) {
 }
 
 /////////////////// Parse pixel table ///////////////////
+// pre-process for line-comments
+for(var i=0;i<rDPix.length;i++){
+	var line = rDPix[i].split(';')[0].trim(); // remove comments
+	rDPix[i] = line;
+}
+rDPix = rDPix.join('').split(',');
 /* pseudo code...
 for each line in rawPaml pixelData
     for each color in colorlist
