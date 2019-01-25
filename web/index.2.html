@@ -6,7 +6,6 @@
 	</head>
 	<body>
 		<script type="text/javascript" src="paml.2.js"></script>
-		<canvas id=MyPamlCanvas></canvas>
 		<paml id='MyPamlFile' style="display:none">
 
 			<info>
@@ -53,12 +52,20 @@
 			</drawpixels>
 		
 		</paml>
+		<canvas id=MyPamlCanvas></canvas>
+		<br /><a id="download" download="myImage.png" href="" onclick="download_img(this);">Download to myImage.png</a>
 		<script type="text/javascript">
 			var myPamlData = document.getElementById('MyPamlFile').outerHTML;
 			var myPamlCanvas = document.getElementById('MyPamlCanvas');
 
 			// parse and draw
 			var myPaml = new PAML( myPamlData ).parse().canvasDraw( myPamlCanvas );
+
+			//add download link
+			download_img = function(e) {
+				var image = myPamlCanvas.toDataURL("image/png");
+				e.href = image;
+			};
 		</script>
 	</body>
 </html>
