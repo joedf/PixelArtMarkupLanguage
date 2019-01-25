@@ -1,6 +1,6 @@
 /* test */
 
-var pikachu = `<paml>
+var rawPaml = `<paml>
 
 	<info>
 		author=Nintendo
@@ -49,22 +49,30 @@ var pikachu = `<paml>
 
 
 var parser = new DOMParser();
-var doc = parser.parseFromString(sxx, "application/xml");
+var doc = parser.parseFromString(rawPaml, "application/xml");
 var paml = doc.getElementsByTagName('paml')[0];
 
 var rInfo = paml.getElementsByTagName('info')[0].textContent.replace(/[ \t]/ig,'').trim().split('\n');
 var rDefs = paml.getElementsByTagName('defcolor')[0].textContent.trim().split('\n');
 var rDPix = paml.getElementsByTagName('drawpixels')[0].textContent.trim().split(',');
 
-
-rawPaml = " , , ,b,y,r,...";
-
 uniqueDefs = '';
+metadata = [];
 newPixelData = [];
 colorlist = [];
 
-//pseudo code...
-/*
+
+/////////////////// Parse Metadata ///////////////////
+for(var i=0;i<rInfo.length;i++){
+	var raw = rInfo[i].trim().split('=');
+	var prop = raw[0];
+	var val = raw[1].split(';')[0].trim(); // remove comments 
+	metadata[prop] = val;
+}
+
+
+/////////////////// Parse color definitions ///////////////////
+/* pseudo code...
 for each def in rawPaml
     make string like this: var b='color:#000;background:#000';
     colorlist.push('b');
@@ -72,11 +80,14 @@ for each def in rawPaml
 for(var i=0;i<rDefs.length;i++){
 	var def = rDefs[i].trim().split('=');
 	var sym = def[0];
-	var val = def[1];
+	var val = def[1].split(';')[0].trim(); // remove comments 
 	colorlist[sym] = val;
 }
+//add default transparent
+colorlist[' '] = 'transparent';
 
-/*
+/////////////////// Parse pixel table ///////////////////
+/* pseudo code...
 for each line in rawPaml pixelData
     for each color in colorlist
         uniqueDefs += regexReplace(line, '('+color+'\,)+', color+',');
@@ -95,17 +106,58 @@ for(var i=0;i<rDPix.length;i++){
 	newPixelData.push(sym);
 }
 
-/*
+
+/////////////////// Define functions ///////////////////
+function color2css(colorcode) {
+	if (colorcode == ' ') //color2css(' '); // defaults to transparent...
+		return 'color:transparent;background:none';
+	return 'color:'+colorcode+';background:'+colorcode;
+}
+
+function consoleDrawPAML(colors,pixels,metadata) {
+	var result = '';
+	var brush = '\0';
+	var arrBrushes = [];
+	for(var i=0;i<pixels.length;i++){
+		if (brush != pixels[i]) { // color change
+			brush = pixels[i];
+			result += '%c';
+			arrBrushes.push( color2css(colors[brush]) );
+		}
+		if (i>0 && i % metadata['xpixels'] == 0) {
+			// insert break
+			result += '\n';
+		}
+		result += pixels[i]+pixels[i]; // print double for monospace font width in Chrome & Firefox
+	}
+	var ConsoleOutParams = [result].concat(arrBrushes);
+	console.log.apply(null,ConsoleOutParams);
+	console.log(ConsoleOutParams);
+}
+
+/////////////////// Print parse data ///////////////////
+/* pseudo code...
 finally create the js call
     console.log(newPixelData, the defs: b,g,t,b,g,b,....);
     // draw canvas...
 */
+console.log('Metadata\n----------------------------');
+for(prop in metadata) {
+	console.log(prop, '=', metadata[prop]);
+}
 console.log('Definitions\n----------------------------');
 for(def in colorlist) {
 	console.log(def, '=', colorlist[def]);
 }
+console.log('Pixel table\n----------------------------');
 var sPrint = ''
 for(var i=0;i<newPixelData.length;i++){
+	if (i>0 && i % metadata['xpixels'] == 0) {
+		// insert break
+		sPrint += '\n';
+	}
 	sPrint = sPrint + newPixelData[i] + ',';
 }
+sPrint = sPrint.slice(0,-1); //trim last ',' char
 console.log(sPrint);
+consoleDrawPAML(colorlist,newPixelData,metadata);
