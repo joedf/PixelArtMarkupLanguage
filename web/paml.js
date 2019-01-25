@@ -56,9 +56,9 @@ var rInfo = paml.getElementsByTagName('info')[0].textContent.replace(/[ \t]/ig,'
 var rDefs = paml.getElementsByTagName('defcolor')[0].textContent.trim().split('\n');
 var rDPix = paml.getElementsByTagName('drawpixels')[0].textContent.trim().split(',');
 
-uniqueDefs = '';
+
 metadata = [];
-newPixelData = [];
+PixelData = [];
 colorlist = [];
 
 
@@ -66,6 +66,8 @@ colorlist = [];
 for(var i=0;i<rInfo.length;i++){
 	var raw = rInfo[i].trim().split('=');
 	var prop = raw[0];
+	if (prop[0] == ';') // watch for comments
+		continue;
 	var val = raw[1].split(';')[0].trim(); // remove comments 
 	metadata[prop] = val;
 }
@@ -85,6 +87,10 @@ for(var i=0;i<rDefs.length;i++){
 }
 //add default transparent
 colorlist[' '] = 'transparent';
+if (typeof metadata['bgcolor'] == 'string' && metadata['bgcolor'].length > 1) {
+	// apply bg color if specified...
+	colorlist[' '] = metadata['bgcolor'];
+}
 
 /////////////////// Parse pixel table ///////////////////
 /* pseudo code...
@@ -95,25 +101,25 @@ for each line in rawPaml pixelData
     add \n at end of line
     if doublewidth
         double each def symbol
-    append modified line to newPixelData
+    append modified line to PixelData
 */
 for(var i=0;i<rDPix.length;i++){
 	var sym = rDPix[i].trim();
 	if (sym.length == 0) {
 		sym = ' ';
 	}
-	newPixelData.push(sym);
+	PixelData.push(sym);
 }
 // check for erronous length and fill with transparent pixels
-var ePixel = (newPixelData.length % metadata['xpixels']);
+var ePixel = (PixelData.length % metadata['xpixels']);
 if (ePixel>0) {
 	if (ePixel > 2) {
-		var nError = newPixelData.length - ePixel;
+		var nError = PixelData.length - ePixel;
 		for(var i=0;i<nError;i++) {
-			newPixelData.push(' ');
+			PixelData.push(' ');
 		}
 	} else {
-		newPixelData = newPixelData.slice(0,-1);
+		PixelData = PixelData.slice(0,-1);
 	}
 }
 
@@ -139,35 +145,72 @@ function consoleDrawPAML(colors,pixels,metadata) {
 			// insert break
 			result += '\n';
 		}
-		result += pixels[i]+pixels[i]; // print double for monospace font width in Chrome & Firefox
+		result += pixels[i].repeat(2); // print double for monospace font width in Chrome & Firefox
 	}
 	var ConsoleOutParams = [result].concat(arrBrushes);
 	console.log.apply(null,ConsoleOutParams);
 	// console.log(ConsoleOutParams); //debug info
 }
 
+function Matrix(w,h) { //see https://stackoverflow.com/a/41815396/883015
+	return Array(h).fill(null).map(() => Array(w).fill(0));
+}
+
 /////////////////// Print parse data ///////////////////
 /* pseudo code...
 finally create the js call
-    console.log(newPixelData, the defs: b,g,t,b,g,b,....);
+    console.log(PixelData, the defs: b,g,t,b,g,b,....);
     // draw canvas...
 */
-console.log('Metadata\n----------------------------');
+console.log('\nMetadata\n----------------------------');
 for(prop in metadata) {
 	console.log(prop, '=', metadata[prop]);
 }
-console.log('Definitions\n----------------------------');
+
+console.log('\nDefinitions\n----------------------------');
 for(def in colorlist) {
 	console.log(def, '=', colorlist[def]);
 }
-console.log('Pixel table\n----------------------------');
+
+console.log('\nPixel table\n----------------------------');
 var sPrint = ''
-for(var i=0;i<newPixelData.length;i++){
+for(var i=0;i<PixelData.length;i++){
 	if (i>0 && i % metadata['xpixels'] == 0) {
 		// insert break
 		sPrint += '\n';
 	}
-	sPrint = sPrint + newPixelData[i] + ',';
+	sPrint = sPrint + PixelData[i] + ',';
 }
 console.log(sPrint);
-consoleDrawPAML(colorlist,newPixelData,metadata);
+
+console.log('\nResult\n----------------------------');
+consoleDrawPAML(colorlist,PixelData,metadata); //formated console.log not fully supported on Edge or IE11
+
+
+
+//canvas draw test
+var iWidth = metadata['xpixels'] * metadata['sizexpixels'];
+var iHeight = metadata['ypixels'] * metadata['sizeypixels'];
+
+document.body.innerHTML = '<canvas id=PAMLCANVAS width='+iWidth+' height='+iHeight+' />';
+pCnv = document.getElementById('PAMLCANVAS');
+
+var img_x = 0, img_y = 0 - metadata['sizeypixels'];
+var pcount, pstart = 0, pstop;
+var pseparator = ',';
+var ptotal = PixelData.length;
+var pvalue = '';
+
+/*
+for (pcount = 0; pcount < ptotal; ++pcount)
+{
+	pstop = strchposo(pseparator, paml->drawpixels, pcount+1);
+	pvalue = SubStr(paml->drawpixels, pstart+1, pstop);
+	img_x = (pcount%(paml->xpixels))*paml->sizexpixels;
+	if ((pcount%(paml->xpixels))==0)
+		img_y += paml->sizeypixels;
+	paml_set_pixel_BMP(bmp,img_x,img_y,paml->sizexpixels,paml->sizeypixels,paml_def_get(pvalue,paml->bgcolor));
+	pstart = pstop;
+
+}
+*/
