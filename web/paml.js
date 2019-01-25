@@ -215,6 +215,10 @@ no_aa_css = `canvas { /* https://stackoverflow.com/a/7665647/883015 */
 	-ms-interpolation-mode: nearest-neighbor;   /* IE                            */
 }`;
 var sheet = window.document.styleSheets[0];
+if (typeof sheet == 'undefined') { // create new blank stylesheet if n/a
+	document.head.innerHTML += '<style></style>'
+	sheet = window.document.styleSheets[0];
+}
 sheet.insertRule(no_aa_css, sheet.cssRules.length);
 
 
