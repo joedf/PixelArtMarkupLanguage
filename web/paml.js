@@ -65,10 +65,13 @@ colorlist = [];
 /////////////////// Parse Metadata ///////////////////
 for(var i=0;i<rInfo.length;i++){
 	var raw = rInfo[i].trim().split('=');
-	var prop = raw[0];
+	var prop = raw[0].toLowerCase().trim();
 	if (prop[0] == ';') // watch for comments
 		continue;
 	var val = raw[1].split(';')[0].trim(); // remove comments 
+	if (['xpixels','ypixels','sizexpixels','sizeypixels'].includes(prop) ) {
+		val = parseInt(val); // read as number
+	}
 	metadata[prop] = val;
 }
 
@@ -192,8 +195,28 @@ consoleDrawPAML(colorlist,PixelData,metadata); //formated console.log not fully 
 var iWidth = metadata['xpixels'] * metadata['sizexpixels'];
 var iHeight = metadata['ypixels'] * metadata['sizeypixels'];
 
-document.body.innerHTML = '<canvas id=PAMLCANVAS width='+iWidth+' height='+iHeight+' />';
+document.body.innerHTML = '<canvas id=PAMLCANVAS width='+iWidth+' height='+iHeight+' style="width:'+iWidth+'px;height:'+iHeight+'px;"></canvas>' + document.body.innerHTML;
 pCnv = document.getElementById('PAMLCANVAS');
+pCtx = pCnv.getContext('2d');
+
+
+// turn off image smoothing / anti-aliasing
+pCtx.imageSmoothingEnabled       = false;
+pCtx.webkitImageSmoothingEnabled = false;
+pCtx.mozImageSmoothingEnabled    = false;
+pCtx.msImageSmoothingEnabled     = false;
+pCtx.oImageSmoothingEnabled      = false;
+no_aa_css = `canvas { /* https://stackoverflow.com/a/7665647/883015 */
+	image-rendering: optimizeSpeed;             /* Older versions of FF          */
+	image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+	image-rendering: -webkit-optimize-contrast; /* Safari                        */
+	image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+	image-rendering: pixelated;                 /* Awesome future-browsers       */
+	-ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+}`;
+var sheet = window.document.styleSheets[0];
+sheet.insertRule(no_aa_css, sheet.cssRules.length);
+
 
 var img_x = 0, img_y = 0 - metadata['sizeypixels'];
 var pcount, pstart = 0, pstop;
@@ -201,16 +224,12 @@ var pseparator = ',';
 var ptotal = PixelData.length;
 var pvalue = '';
 
-/*
-for (pcount = 0; pcount < ptotal; ++pcount)
+for (pcount = 0; pcount < ptotal; ++pcount) 
 {
-	pstop = strchposo(pseparator, paml->drawpixels, pcount+1);
-	pvalue = SubStr(paml->drawpixels, pstart+1, pstop);
-	img_x = (pcount%(paml->xpixels))*paml->sizexpixels;
-	if ((pcount%(paml->xpixels))==0)
-		img_y += paml->sizeypixels;
-	paml_set_pixel_BMP(bmp,img_x,img_y,paml->sizexpixels,paml->sizeypixels,paml_def_get(pvalue,paml->bgcolor));
-	pstart = pstop;
-
+	img_x = (pcount%metadata['xpixels'])*metadata['sizexpixels'];
+	if ((pcount%metadata['xpixels'])==0)
+		img_y += metadata['sizeypixels'];
+	pCtx.fillStyle = colorlist[ PixelData[pcount] ];
+	pCtx.fillRect(img_x,img_y,metadata['sizexpixels'],metadata['sizeypixels']);
 }
-*/
+
