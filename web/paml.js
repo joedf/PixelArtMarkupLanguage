@@ -47,6 +47,8 @@ var rawPaml = `<paml>
 
 </paml>`;
 
+// avoid xml parse error
+rawPaml = rawPaml.replace(/&/g,'and');
 
 var parser = new DOMParser();
 var doc = parser.parseFromString(rawPaml, "application/xml");
