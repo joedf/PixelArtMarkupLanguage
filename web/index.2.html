@@ -7,50 +7,91 @@
 	<body>
 		<script type="text/javascript" src="paml.2.js"></script>
 		<paml id='MyPamlFile' style="display:none">
-
 			<info>
 				author=Nintendo
-				dateofcreation=2013-05-31
-				license=Recreated_by_Joe_DF
-				xpixels=19
-				ypixels=20
-				sizexpixels=10
-				sizeypixels=10
-				bgcolor=#0055AA ;blue
+				dateofcreation=Recreated_by_joedf_on_2012Y10M18D
+				license=undefined
+				xpixels=33 ;number of pixels, ex: xypixels=15
+				ypixels=38
+				sizexpixels=8 ;pixel size, scale 2x size, ex: sizepixels=2
+				sizeypixels=8
+				bgcolor=#666666
 			</info>
 		
-			<defcolor>
-				b=black ;or o=b000000
-				g=#555555 ;Dark grey
-				w=white
-				y=yellow
-				x=#D3D300
-				r=#FF3E3E
+			<defcolor> ;colorpixels=hex
+				 = ;transparent
+				b=black ;or o=#000000
+				w=#F8F8F8 ;sort of white
+				
+				;brown
+				f=#885818 ;lighter brown
+				a=#500000 ;dark brown
+				
+				;red & pink
+				c=#F84070 ;pink
+				k=#F8D0C0 ;lightest pink - skin
+				g=#F87068 ;lighter pink - skin
+				z=#B02860 ;magenta-pink red
+				y=#B82800 ;red boots
+				
+				;orange & yellow
+				d=#F8D870 ;lighter yellow
+				m=#F8F800 ;yellow
+				l=#F88800 ;orange
+				e=#D8A038 ;dark orange only used once
+				
+				;green
+				h=#00F800 ;Lightest green
+				j=#00B800 ;lighter green
+				i=#007800 ;dark green
+				
+				;blue - turquoise
+				p=#80D8C8 ;light turquoise
+				n=#408098 ;turquoise
+				o=#203088 ;dark blue
 			</defcolor>
 		
-			<drawpixels>
-				 , , , , ,b,b, , , , , , , , , ,b, , ,
-				 , , , ,b,g,b, , , , , , , , ,b,y,b, ,
-				 , , , ,b,y,b, , , , , , , ,b,y,x,x,b,
-				 , , ,b,y,y,b, , , , ,b,b,b,y,x,x,x,b,
-				 , , ,b,y,x,b, , ,b,b,g,g,b,x,x,x,b, ,
-				 , ,b,y,y,y,y,b,b,y,y,g,b,x,x,x,b, , ,
-				 ,b,y,y,y,y,y,y,y,y,y,b,b,x,x,b, , , ,
-				b,w,y,y,y,y,y,y,y,y,x,b, ,b,x,x,b, , ,
-				b,b,y,y,y,y,y,y,y,y,y,b, , ,b,x,b, , ,
-				b,y,y,y,y,w,b,y,y,y,y,x,b,b,x,b, , , ,
-				 ,b,y,y,y,b,b,r,r,y,x,x,b,b,b, , , , ,
-				 , ,b,x,y,y,y,r,x,x,x,b,b,b, , , , , ,
-				 ,b,y,x,x,x,x,x,x,x,x,x,x,b, , , , , ,
-				 , ,b,b,y,y,y,y,y,b,x,x,b,b, , , , , ,
-				 , , ,b,x,y,y,y,b,y,x,x,x,b, , , , , ,
-				 , ,b,x,b,x,x,x,x,b,x,x,x,b, , , , , ,
-				 , ,b,b,b,b,b,x,x,x,x,x,b, , , , , , ,
-				 , , , , , , ,b,b,b,x,b,b, , , , , , ,
-				 , , , , , , , ,b,y,y,x,b, , , , , , ,
-				 , , , , , , , , ,b,b,b, , , , , , , ,
+			<drawpixels> ;33x38 equals 1254 pixels
+				 , , , , , , , , , , , ,a,a,a,a, , , , , , , , , , , , , , , , , ,
+				 , , , , , , , , , ,a,a,z,z,c,d,a, , , , , , , , , , , , , , , , ,
+				 , , , , , , , , ,a,z,z,c,c,e,w,a, , , , , , , , , , , , , , , , ,
+				 , , , , , , , ,a,z,c,c,c,a,b,b,b,b,b, , , , , , , , , , , , , , ,
+				 , , , , , , ,a,z,c,c,a,b,b,b,b,b,b,b,b, , , , , , , , , , , , , ,
+				 , , , , , , ,a,c,c,a,b,b,b,b,b,b,b, , , , , , , , , , , , , , , ,
+				 , , , , , ,a,f,f,a,b,b,b,w,w,g,w, , , , , ,a,a, , , , , , , , , ,
+				 , , , , , ,f,w,w,f,a,b,g,w,b,g,b, , , , ,b,h,i,b, , , , , , , , ,
+				 , , , , ,f,w,w,w,w,f,b,g,w,b,k,k,k,k,f,b,j,i,w,w, , , , , , , , ,
+				 , , , , ,f,w,w,w,w,f,b,b,k,k,k,k,k,k,f,b,i,w,w,b, , , , , , , , ,
+				 , , , , ,f,w,w,a,a,a,b,k,k,b,g,g,g,g,f,b,w,w,w,b, ,b,b,b, , , , ,
+				 , , , , ,a,w,a,c,c,c,a,k,b,b,b,b,b,b,l,b,w,w,w,w,b,h,h,h,b,b, , ,
+				 , , , , ,a,a,z,z,c,c,c,a,k,b,b,b,b,l,l,b,i,w,w,i,h,h,h,w,w,h,b, ,
+				 , , , ,a,a,m,a,z,z,c,c,a,k,k,k,f, ,b,b,b,j,i,i,h,h,h,h,h,b,w,b, ,
+				 , , ,a,a,m,a,a,z,z,z,c,a,f,f,f, ,b,l,b,i,j,j,h,h,h,h,h,h,h,h,h,b,
+				 , , ,a,m,a,o,a,z,z,z,z,a,n,a, , ,f,f,f,i,j,h,h,h,h,j,h,h,h,h,h,b,
+				 , , ,a,m,a,o,o,a,a,a,a,n,p,z,a,b,w,w,w,f,j,h,h,h,w,b,j,h,h,h,h,b,
+				 , , ,a,m,o,n,p,n,n,n,n,w,w,p,o,b,w,w,w,f,j,h,h,h,w,b,j,h,h,h,h,b,
+				 , ,a,m,a,o,n,p,p,p,p,p,w,w,p,o,b,w,w,w,f,j,h,h,w,b,b,i,j,h,h,j,b,
+				 , ,a,m,a,o,o,o,o,p,p,p,p,p,p,o,b,f,f,f,b,j,w,w,w,w,w,b,i,j,j,b, ,
+				 , ,a,m,a,o,n,n,o,p,p,p,p,o,o,o,p,b,l,b,i,j,w,w,b,w,w,w,b,b,b, , ,
+				 , ,a,m,a,f,o,n,n,n,n,p,p,p,p,o,p,p,b,b,j,j,w,b, ,b,b,b, , , , , ,
+				 , ,a,m,a,f,f,o,o,n,n,n,p,p,p,p,o,b,b,i,j,w,b, , , , , , , , , , ,
+				 ,a,m,a,a,f,f,f,f,o,o,n,n,p,p,p,o,w,b,j,h,w,b, , , , , , , , , , ,
+				 ,a,m,a,f,f,f,f,f,a,w,o,n,n,n,p,o,w,b,j,h,w,b, , , , , , , , , , ,
+				a,m,a,a,f,f,f,f,f,a,b,w,o,n,n,n,o,b,j,h,w,w,b, , , , , , , , , , ,
+				a,a,a,a,a,a,a,a,a,a,b,w,b,o,o,o,b,b,b,h,w,b, , , , , , , , , , , ,
+				 , , , , , , , ,b,w,j,b,b,f,f,f,f,d,b,h,w,b, , , , , , , , , , , ,
+				 , , , , , , , , ,b,w,j,b,b,b,b,b,b,b,w,w,b, , , , , , , , , , , ,
+				 , , , , , , , , ,b,w,w,w,w,b,l,b,w,w,w,b, , , , , , , , , , , , ,
+				 , , , , , , , , , ,b,w,w,b,l,l,l,b,w,w,b, , , , , , , , , , , , ,
+				 , , , , , , , , , ,b,w,b,b,l,l,l,b,w,b, , , , , , , , , , , , , ,
+				 , , , , , , , , , , ,b,b,w,b,b,b,w,b, , , , , , , , , , , , , , ,
+				 , , , , , , , , , , , ,b,b,b,b,b,b, , , , , , , , , , , , , , , ,
+				 , , , , , , , , , , ,b,y,y,y,y,y,b, , , , , , , , , , , , , , , ,
+				 , , , , , , , , , , ,b,y,y,y,y,y,w,b, , , , , , , , , , , , , , ,
+				 , , , , , , , , , , ,b,y,y,y,y,y,y,b, , , , , , , , , , , , , , ,
+				 , , , , , , , , , , ,b,b,b,b,b,b,b,b, , , , , , , , , , , , , , ,
 			</drawpixels>
-		
+
 		</paml>
 		<canvas id=MyPamlCanvas></canvas>
 		<br /><a id="download" download="myImage.png" href="" onclick="download_img(this);">Download to myImage.png</a>

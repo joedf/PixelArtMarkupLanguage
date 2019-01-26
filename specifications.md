@@ -24,7 +24,7 @@ The `<info>` tag is used to define metadata, options and the required informatio
 
 The `<defcolor>` tag is used to define the symbols and associated colors used in the `<drawpixels>` tag. 
 
-The `<drawpixels>` tag
+The `<drawpixels>` tag 
 
 ## Comments
 PAML allows for line comments using `;`. PAML files are preprocess before being parsed by an xml parser allowing for things like `&` to be used when commenting. That said XML-style comments (`<!-- XML comment -->`) should also be valid but are not explicitly supported.
