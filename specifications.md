@@ -14,6 +14,7 @@ The `<paml>` tag is used to enclose the all other tags and their associated info
   
 The `<info>` tag is used to define metadata, options and the required information to correctly draw out the pixels later on. The properties are (defined in "INI" style with a `=` between the key and the value):
 - `author`: optional, used for name of author, attribution or copyright holder(s) of the artwork.
+- `title`: (? to be added)
 - `dateofcreation`: optional, a date as to when the artwork was created or copyright years, etc.
 - `license`: optional, required if some artwork is copyrighted or trademarked.
 - `xpixels`: required, specifies the width (in pixels) of the artwork
