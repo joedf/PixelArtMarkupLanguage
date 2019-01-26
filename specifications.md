@@ -10,7 +10,7 @@ There are 4 required tags:
 - `<defcolor>`
 - `<drawpixels>`
 
-The `<paml>` tag is used to enclose the all other tags and their associated information. It delimits when the PAML file start and when it ends (`</paml>`).
+The `<paml>` tag is used to enclose the all other tags and their associated information. It delimits when the PAML file starts and when it ends (`</paml>`).
   
 The `<info>` tag is used to define metadata, options and the required information to correctly draw out the pixels later on. The properties are (defined in "INI" style with a `=` between the key and the value):
 - `author`: optional, used for name of author, attribution or copyright holder(s) of the artwork.
@@ -23,3 +23,9 @@ The `<info>` tag is used to define metadata, options and the required informatio
 - `bgcolor`: optional, defines the background color of the image, when each transparent pixel will be replaced with
 
 The `<defcolor>` tag is used to define the symbols and associated colors used in the `<drawpixels>` tag. 
+
+The `<drawpixels>` tag
+
+## Comments
+PAML allows for line comments using `;`. PAML files are preprocess before being parsed by an xml parser allowing for things like `&` to be used when commenting. That said XML-style comments (`<!-- XML comment -->`) should also be valid but are not explicitly supported.
+
