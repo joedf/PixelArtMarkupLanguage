@@ -10,10 +10,30 @@ class PAML {
 	}
 
 	parseXML() {
-		var parser = new DOMParser();
-		var doc = parser.parseFromString(this.rawPaml, "application/xml");
-		this.paml = doc.getElementsByTagName('paml')[0];
+		this.pamlXML = this.preprocess(this.rawPaml);
+		try {
+			var parser = new DOMParser();
+			var doc = parser.parseFromString(this.pamlXML, "application/xml");
+			this.paml = doc.getElementsByTagName('paml')[0];
+		} catch (e) {
+			// retry with '&' changed...
+			this.pamlXML = this.pamlXML.replace(/&/g,'and');
+
+			var parser = new DOMParser();
+			var doc = parser.parseFromString(this.pamlXML, "application/xml");
+			this.paml = doc.getElementsByTagName('paml')[0];
+		}
 		return this.paml;
+	}
+
+	preprocess(original) {
+		var processedPAML = '';
+		var lines = original.split('\n');
+		for(var i=0;i<lines.length;i++) {
+			// purge comments
+			processedPAML += lines[i].split(';')[0] + '\n';
+		}
+		return processedPAML;
 	}
 
 	parse() {
@@ -40,6 +60,14 @@ class PAML {
 				val = parseInt(val); // read as number
 			}
 			this.Metadata[prop] = val;
+		}
+
+		// default these to 1 if unspecified
+		if (typeof this.Metadata['sizexpixels'] != 'number') {
+			this.Metadata['sizexpixels'] = 1;
+		}
+		if (typeof this.Metadata['sizeypixels'] != 'number') {
+			this.Metadata['sizeypixels'] = 1;
 		}
 
 		/////////////////// Parse color definitions ///////////////////
