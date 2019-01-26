@@ -10,13 +10,36 @@
 *.dbproj merge=union
 
 # Standard to msysgit
-*.doc	 diff=astextplain
-*.DOC	 diff=astextplain
-*.docx diff=astextplain
-*.DOCX diff=astextplain
-*.dot  diff=astextplain
-*.DOT  diff=astextplain
-*.pdf  diff=astextplain
-*.PDF	 diff=astextplain
-*.rtf	 diff=astextplain
-*.RTF	 diff=astextplain
+*.doc    diff=astextplain
+*.DOC    diff=astextplain
+*.docx   diff=astextplain
+*.DOCX   diff=astextplain
+*.dot    diff=astextplain
+*.DOT    diff=astextplain
+*.pdf    diff=astextplain
+*.PDF    diff=astextplain
+*.rtf    diff=astextplain
+*.RTF    diff=astextplain
+
+# Git settings
+.gitattributes text
+.gitconfig     text
+.gitignore     text
+.gitmodules    text
+
+# Misc.
+*.ahk    text
+*.bat    text eol=crlf
+*.html   text
+*.iss    text
+*.js     text
+*.md     text
+*.nsi    text
+*.paml   text
+*.rc     text
+*.txt    text
+
+paml_udl_npp   text
+
+# Images
+*.ico    binary
