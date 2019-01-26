@@ -28,7 +28,7 @@ class PAML {
 
 	preprocess(original) {
 		var processedPAML = '';
-		var lines = original.split('\n');
+		var lines = original.split(/\r?\n/);
 		for(var i=0;i<lines.length;i++) {
 			// purge comments
 			processedPAML += lines[i].split(';')[0] + '\n';
@@ -39,9 +39,10 @@ class PAML {
 	parse() {
 		this.parseXML();
 
-		var rInfo = this.paml.getElementsByTagName('info')[0].textContent.replace(/[ \t]/ig,'').trim().split('\n');
-		var rDefs = this.paml.getElementsByTagName('defcolor')[0].textContent.trim().split('\n');
-		var rDPix = this.paml.getElementsByTagName('drawpixels')[0].textContent.trim().split('\n');
+		//support both CR+LF https://stackoverflow.com/a/36618848/883015
+		var rInfo = this.paml.getElementsByTagName('info')[0].textContent.replace(/[ \t]/ig,'').trim().split(/\r?\n/);
+		var rDefs = this.paml.getElementsByTagName('defcolor')[0].textContent.trim().split(/\r?\n/);
+		var rDPix = this.paml.getElementsByTagName('drawpixels')[0].textContent.trim().split(/\r?\n/);
 
 		// reset vars
 		this.Metadata = [];
@@ -205,5 +206,7 @@ class PAML {
 			pCtx.fillStyle = this.colorlist[ this.PixelData[i] ];
 			pCtx.fillRect(img_x,img_y,this.Metadata['sizexpixels'],this.Metadata['sizeypixels']);
 		}
+
+		return this;
 	}
 }
