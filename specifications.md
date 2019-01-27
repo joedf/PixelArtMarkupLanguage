@@ -23,10 +23,9 @@ The `<info>` tag is used to define metadata, options and the required informatio
 - `sizeypixels`: optional, define the height (in pixels) of artwork's pixel, used for scaling, default is 1px
 - `bgcolor`: optional, defines the background color of the image, when each transparent pixel will be replaced with
 
-The `<defcolor>` tag is used to define the symbols and associated colors used in the `<drawpixels>` tag. 
+The `<defcolor>` tag is used to define the symbols and associated colors used in the `<drawpixels>` tag. Each color used in the palette should be defined in the following form: `symbol=colorcode`. The `symbol` used can be single or multi-character of which are valid for xml (except for `=`). That said, it is recommended to use a single character or each different color if the palette is not execessively huge. This allows for the `<drawpixels>` to have an "ASCII art" look. The `colorcode` can be HTML named colours such `DarkGoldenRod` (equivalent to `#B8860B`), hexadecimal RGB in the form `#ffffff`. Note `transparent` can be specified in the same form as an HTML named color allow for transparent pixels. That said, a predefined color is available as ' ' which is replaced by the color of `bgcolor` if specified.
 
-The `<drawpixels>` tag ...
-a predefined color is ' ' for transparent which is replace by `bgcolor` is specified.
+The `<drawpixels>` tag is used to layout the "pixel table" indicating what pixels should be a certain color according to the palette defined in `<defcolor>`. Each sequential pixel or symbol is to be separated by a `,` (comma), new lines are not needed but offer editing visual benefits. Whitespaces are non-specific too, meaning ` , , ,` for three successive transparent pixels is the same as specifying `,,,`.
 
 ## Comments
 PAML allows for line comments using `;`. PAML files are preprocess before being parsed by an xml parser allowing for things like `&` to be used when commenting. That said XML-style comments (`<!-- XML comment -->`) should also be valid but are not explicitly supported.
