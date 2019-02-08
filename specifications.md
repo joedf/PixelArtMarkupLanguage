@@ -10,7 +10,7 @@ There are 4 required tags:
 - `<defcolor>`
 - `<drawpixels>`
 
-The `<paml>` tag is used to enclose the all other tags and their associated information. It delimits when the PAML file starts and when it ends (`</paml>`).
+The `<paml>` tag is used to enclose the all other tags and their associated information. It delimits when the PAML file starts and when it ends (`</paml>`). It should specify version and content information in the following format: `<paml version="1.0.0.0" encoding="UTF-8" type="strict">` where `type` can be either `loose`, `strict` or `experimental`. Version will be following [Semantic Version](https://semver.org/) whereas `UTF-8` is recommended for the `encoding`.
   
 The `<info>` tag is used to define metadata, options and the required information to correctly draw out the pixels later on. The properties are (defined in "INI" style with a `=` between the key and the value):
 - `author`: optional, used for name of author, attribution or copyright holder(s) of the artwork.
