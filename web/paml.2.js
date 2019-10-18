@@ -23,6 +23,10 @@ class PAML {
 			var doc = parser.parseFromString(this.pamlXML, "application/xml");
 			this.paml = doc.getElementsByTagName('paml')[0];
 		}
+		if (this.paml == undefined){
+			console.warn('Warning: raw PAML data was not wrapped with <paml> defnition tags, assumptions will be made ...');
+			this.paml = doc;
+		}
 		return this.paml;
 	}
 
